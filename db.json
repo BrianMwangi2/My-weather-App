@@ -1,0 +1,90 @@
+[
+  {
+      "coord": {
+          "lon": -0.1257,
+          "lat": 51.5085
+      },
+      "weather": [
+          {
+              "id": 803,
+              "main": "Clouds",
+              "description": "broken clouds",
+              "icon": "04d"
+          }
+      ],
+      "base": "stations",
+      "main": {
+          "temp": 277.88,
+          "feels_like": 277.88,
+          "temp_min": 275.8,
+          "temp_max": 279.15,
+          "pressure": 1027,
+          "humidity": 91
+      },
+      "visibility": 10000,
+      "wind": {
+          "speed": 0.89,
+          "deg": 246,
+          "gust": 1.34
+      },
+      "clouds": {
+          "all": 73
+      },
+      "dt": 1712727272,
+      "sys": {
+          "type": 2,
+          "id": 2091269,
+          "country": "GB",
+          "sunrise": 1712726083,
+          "sunset": 1712774897
+      },
+      "timezone": 3600,
+      "id": 2643743,
+      "name": "London",
+      "cod": 200
+  },
+  {
+      "coord": {
+          "lon": -87.65,
+          "lat": 41.85
+      },
+      "weather": [
+          {
+              "id": 801,
+              "main": "Clouds",
+              "description": "few clouds",
+              "icon": "02n"
+          }
+      ],
+      "base": "stations",
+      "main": {
+          "temp": 282.54,
+          "feels_like": 282.28,
+          "temp_min": 279.49,
+          "temp_max": 284.91,
+          "pressure": 1014,
+          "humidity": 73
+      },
+      "visibility": 10000,
+      "wind": {
+          "speed": 1.34,
+          "deg": 133,
+          "gust": 1.79
+      },
+      "clouds": {
+          "all": 11
+      },
+      "dt": 1712728115,
+      "sys": {
+          "type": 2,
+          "id": 2010190,
+          "country": "US",
+          "sunrise": 1712747839,
+          "sunset": 1712795144
+      },
+      "timezone": -18000,
+      "id": 4887398,
+      "name": "Chicago",
+      "cod": 200
+    }
+]
