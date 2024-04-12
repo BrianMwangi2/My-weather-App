@@ -15,6 +15,38 @@ function setActive(pageName) {
         }
     });
 }
+function extractContactInfo() {
+    // Find the element containing contact information
+    const contactDiv = document.getElementById('contact-info');
+
+    if (contactDiv) {
+        // Extract information from the child elements
+        const name = contactDiv.querySelector('p:nth-child(2)').textContent.trim();
+        const email = contactDiv.querySelector('p:nth-child(3)').textContent.trim();
+        const phone = contactDiv.querySelector('p:nth-child(4)').textContent.trim();
+
+        // Create an object to hold the extracted contact information
+        const contact = {
+            name: name.replace('Name: ', ''),
+            email: email.replace('Email: ', ''),
+            phone: phone.replace('Phone: ', '')
+        };
+
+        return contact;
+    } else {
+        console.error('Contact information container not found.');
+        return null;
+    }
+}
+
+// Call the function to extract and display contact information
+const extractedContact = extractContactInfo();
+if (extractedContact) {
+    console.log('Extracted Contact Information:');
+    console.log('Name:', extractedContact.name);
+    console.log('Email:', extractedContact.email);
+    console.log('Phone:', extractedContact.phone);
+}
 
 // creating variAables that will be used in running the code !
 const weatherForm = document.querySelector(".weatherForm");// this is the form that will be used to get the city name
@@ -65,28 +97,48 @@ async function getWeatherData(city) {
 }
 
 // in this function we are desaling w the weather info that is mainly the city, temp, humidity, and description
+function createWeatherElement(tag, textContent) {
+    const element = document.createElement(tag);
+    element.textContent = textContent;
+    element.classList.add(`${tag.toLowerCase()}Display`); // Add class based on element type
+    return element;
+}
 
+// Define a mapping object for weather IDs to emojis
+const weatherEmojiMap = {
+    '2xx': '⛈️', // Thunderstorm
+    '3xx': '🌧️', // Drizzle
+    '5xx': '🌧️', // Rain
+    '6xx': '❄️', // Snow
+    '7xx': '🌫️', // Atmosphere
+    '800': '☀️', // Clear
+    '80x': '☁️', // Clouds
+    'default': '❓' // Default emoji
+};
 
-function displayWeatherInfo(data){
+// Function to get weather emoji based on weather ID
+function getWeatherEmoji(weatherId) {
+    const category = Math.floor(weatherId / 100); // Get the category (2, 3, 5, 6, 7, 8)
+    const key = (weatherId === 800) ? '800' : `${category}xx`; // Special case for clear weather
+    return weatherEmojiMap[key] || weatherEmojiMap['default'];
+}
 
-    const {name: city, 
-           main: {temp, humidity}, 
-           weather: [{description, id}]} = data;
+function displayWeatherInfo(data) {
+    const { name: city, main: { temp, humidity }, weather } = data;
 
-    card.textContent = "";
+    card.innerHTML = ""; // Clear card content
     card.style.display = "flex";
 
-    const cityDisplay = document.createElement("h1");
-    const tempDisplay = document.createElement("p");
-    const humidityDisplay = document.createElement("p");
-    const descDisplay = document.createElement("p");
-    const weatherEmoji = document.createElement("p");
-// adding text to the important weather details 
-    cityDisplay.textContent = city;
-    tempDisplay.textContent = `${((temp - 273.15) * (9/5) + 32).toFixed(1)}°F`;
-    humidityDisplay.textContent = `Humidity: ${humidity}%`;
-    descDisplay.textContent = description;
-    weatherEmoji.textContent = getWeatherEmoji(id);
+    const elements = [
+        createWeatherElement("h1", city),
+        createWeatherElement("p", `${((temp - 273.15) * (9 / 5) + 32).toFixed(1)}°F`),
+        createWeatherElement("p", `Humidity: ${humidity}%`),
+        ...weather.map(w => createWeatherElement("p", w.description)),
+        createWeatherElement("p", getWeatherEmoji(weather[0].id)) // Use the first weather condition ID for emoji
+    ];
+
+    elements.forEach(element => card.appendChild(element));
+}
 // adding classes to the elements
 
 
@@ -101,7 +153,7 @@ function displayWeatherInfo(data){
     card.appendChild(humidityDisplay);
     card.appendChild(descDisplay);
     card.appendChild(weatherEmoji);
-}
+
 // this weather ids are derived from the site https://openweathermap.org/weather-conditions
 
 function getWeatherEmoji(weatherId){
