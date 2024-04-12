@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-
+  
+       
+    </div>
+    <header>
+        <div class="container">
+            <h1>Weather Website</h1>
+            <nav>
+                <ul id="navbar">
+                    <li><a href="#" onclick="setActive('home')">Home</a></li>
+                    <li><a href="#" onclick="setActive('forecast')">Forecast</a></li>
+                    <li><a href="#" onclick="setActive('about')">About</a></li>
+                    <li><a href="#" onclick="setActive('contact')">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <section id="weather-info">
+            <h2>Today's Weather</h2>
+            <p>Welcome to our weather website! Stay informed about the latest weather conditions in your area.</p>
+            <p>Weather affects everyone, whether it's sunny skies or stormy weather. Understanding the forecast helps you plan your activities and stay safe.</p>
+            <p>Explore our website to get real-time weather updates and forecasts for your location.</p>
+        </section>
+    </div>
     <form class="weatherForm">
         <input type="text" class="cityInput" placeholder="Enter city">
         <button type="submit">Get Weather</button>
@@ -15,6 +38,12 @@
 
     <div class="card" style="display: none">
     </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Weather Website. All rights reserved.</p>
+        </div>
+    </footer>
  
     <script src="index.js"></script>
 </body>

@@ -1,4 +1,21 @@
 
+// functions for the navigation bar !
+function setActive(pageName) {
+    // Get all the <a> elements inside the navbar
+    var navbarItems = document.querySelectorAll('#navbar a');
+
+    // Loop through each <a> element
+    navbarItems.forEach(function(item) {
+        // Remove 'active' class from all elements
+        item.classList.remove('active');
+
+        // Add 'active' class to the clicked element
+        if (item.innerHTML.toLowerCase() === pageName) {
+            item.classList.add('active');
+        }
+    });
+}
+
 // creating variAables that will be used in running the code !
 const weatherForm = document.querySelector(".weatherForm");// this is the form that will be used to get the city name
 
